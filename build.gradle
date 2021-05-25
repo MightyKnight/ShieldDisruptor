@@ -10,9 +10,9 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-group = 'org.example'
-version = '1.1.1'
-archivesBaseName = 'ShieldDisruptor'
+group = project.maven_group
+version = project.mod_version
+archivesBaseName = project.archives_base_name
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -20,13 +20,13 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	
-    modApi "me.shedaniel.cloth:cloth-config-fabric:4.11.26", {
+    modApi "me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}", {
         exclude group: "net.fabricmc.fabric-api"
     }
-    modApi "me.sargunvohra.mcmods:autoconfig1u:3.2.0-unstable", {
+    modApi "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}", {
         exclude group: "net.fabricmc.fabric-api"
     }
-    modImplementation "io.github.prospector:modmenu:1.14.6+build.31", {
+    modImplementation "io.github.prospector:modmenu:${project.modmenu_version}", {
         exclude group: "net.fabricmc.fabric-api"
     }
 }
