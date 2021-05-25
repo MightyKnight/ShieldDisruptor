@@ -1,4 +1,5 @@
 {
   "text.autoconfig.shieldisruptor_general.option.isEnabled": "Mod aktivieren",
-  "text.autoconfig.shieldisruptor_general.option.hiddenItems": "Versteckte Gegenstände in der Zweithand"
+  "text.autoconfig.shieldisruptor_general.option.hiddenItems": "Versteckte Gegenstände in der Zweithand",
+  "text.autoconfig.shieldisruptor_general.title": "Shield Disruptor"
 }
