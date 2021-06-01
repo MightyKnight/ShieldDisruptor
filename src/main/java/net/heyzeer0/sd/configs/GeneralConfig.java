@@ -1,7 +1,7 @@
 package net.heyzeer0.sd.configs;
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
 import net.minecraft.item.Items;
 import net.minecraft.util.registry.Registry;
 
