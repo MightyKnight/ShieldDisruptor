@@ -23,7 +23,6 @@ This is a port of the original ShieldDisruptor by [HeyZeer0](https://github.com/
 You need to have the following dependencies installed:
 - [Fabric API](https://modrinth.com/mod/fabric-api)
 - [Cloth Config API](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
-- [Auto Config Updated API](https://www.curseforge.com/minecraft/mc-mods/auto-config-updated-api)
 
 ## Adding hidden offhand items
 This requires Mod Menu to be installed.
