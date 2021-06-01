@@ -7,13 +7,12 @@
   "description": "Hides your offhand shield, totem of undying or any other configurated item while not using it.",
   "icon": "assets/shieldisruptor/logo.png",
   "authors": [
-    "HeyZeer0"
+    "MightyKnight", "HeyZeer0"
   ],
   "contact": {
-    "homepage": "https://github.com/HeyZeer0",
-    "sources": "https://github.com/HeyZeer0/ShieldDisruptor",
-    "email": "heyzeer0@wynntils.com",
-    "issues": "https://github.com/HeyZeer0/ShieldDisruptor/issues"
+    "homepage": "https://github.com/MightyKnight",
+    "sources": "https://github.com/MightyKnight/ShieldDisruptor",
+    "issues": "https://github.com/MightyKnight/ShieldDisruptor/issues"
   },
   "license": "AGPL-3.0",
   "environment": "client",
