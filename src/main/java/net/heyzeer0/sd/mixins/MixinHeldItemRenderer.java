@@ -1,6 +1,7 @@
 package net.heyzeer0.sd.mixins;
 
 import net.heyzeer0.sd.ModCore;
+import net.heyzeer0.sd.configs.GeneralConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -9,6 +10,7 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,9 +31,22 @@ public class MixinHeldItemRenderer {
 
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player != null && player.getOffHandStack() != stack) return;
-        if (!ModCore.getMain().getGeneralConfig().hiddenItems.contains(Registry.ITEM.getId(stack.getItem()).toString())) return;
 
-        callback.cancel();
+        GeneralConfig config = ModCore.getMain().getGeneralConfig();
+        String id = Registry.ITEM.getId(stack.getItem()).toString();
+
+        // Check if the item is specified in config
+        if(config.contains(id) || (id.startsWith("minecraft:") && config.contains(id.substring(10)))) {
+            callback.cancel();
+        }
+
+        // Check if the item has a tag that was specified in config
+        for(Identifier i : MinecraftClient.getInstance().getNetworkHandler().getTagManager().getItems().getTagsFor(stack.getItem())) {
+            if (ModCore.getMain().getGeneralConfig().hiddenItems.contains('#' + i.toString())) {
+                callback.cancel();
+            }
+        }
+        
     }
 
 }
