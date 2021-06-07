@@ -10,6 +10,7 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,12 +42,11 @@ public class MixinHeldItemRenderer {
         }
 
         // Check if the item has a tag that was specified in config
-        for(Identifier i : MinecraftClient.getInstance().getNetworkHandler().getTagManager().getItems().getTagsFor(stack.getItem())) {
+        for(Identifier i : ItemTags.getTagGroup().getTagsFor(stack.getItem())) {
             if (ModCore.getMain().getGeneralConfig().hiddenItems.contains('#' + i.toString())) {
                 callback.cancel();
             }
         }
-        
     }
 
 }
