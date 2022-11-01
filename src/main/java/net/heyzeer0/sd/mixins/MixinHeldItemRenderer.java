@@ -11,6 +11,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tag.ItemTags;
+import net.minecraft.tag.TagBuilder;
+import net.minecraft.tag.TagEntry;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,8 +45,19 @@ public class MixinHeldItemRenderer {
         }
 
         // Check if the item has a tag that was specified in config
-        for(Identifier i : ItemTags.getTagGroup().getTagsFor(stack.getItem())) {
-            if (ModCore.getMain().getGeneralConfig().hiddenItems.contains('#' + i.toString())) {
+        for(String tagKey : ModCore.getMain().getGeneralConfig().hiddenItems) {
+
+            // Validate tag to prevent crashes
+            if(!tagKey.matches("#[a-z0-9_.-]+:[a-z0-9_.-]+")) {
+                continue;
+            }
+
+            TagKey t = TagKey.of(
+                    Registry.ITEM_KEY,
+                    new Identifier(
+                            tagKey.split(":")[0].replaceFirst("#", ""),
+                            tagKey.split(":")[1]));
+            if(stack.isIn(t)) {
                 callback.cancel();
             }
         }
