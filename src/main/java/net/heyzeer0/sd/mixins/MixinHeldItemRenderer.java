@@ -10,12 +10,10 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tag.ItemTags;
-import net.minecraft.tag.TagBuilder;
-import net.minecraft.tag.TagEntry;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,7 +35,7 @@ public class MixinHeldItemRenderer {
         if (player != null && player.getOffHandStack() != stack) return;
 
         GeneralConfig config = ModCore.getMain().getGeneralConfig();
-        String id = Registry.ITEM.getId(stack.getItem()).toString();
+        String id = Registries.ITEM.getId(stack.getItem()).toString();
 
         // Check if the item is specified in config
         if(config.contains(id) || (id.startsWith("minecraft:") && config.contains(id.substring(10)))) {
@@ -53,7 +51,7 @@ public class MixinHeldItemRenderer {
             }
 
             TagKey t = TagKey.of(
-                    Registry.ITEM_KEY,
+                    RegistryKeys.ITEM,
                     new Identifier(
                             tagKey.split(":")[0].replaceFirst("#", ""),
                             tagKey.split(":")[1]));
