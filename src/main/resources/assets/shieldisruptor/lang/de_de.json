@@ -1,5 +1,9 @@
 {
   "text.autoconfig.shieldisruptor_general.option.isEnabled": "Mod aktivieren",
-  "text.autoconfig.shieldisruptor_general.option.hiddenItems": "Versteckte Gegenstände in der Zweithand",
-  "text.autoconfig.shieldisruptor_general.title": "Shield Disruptor"
+  "text.autoconfig.shieldisruptor_general.option.hideShields": "ALLE Schilder verstecken",
+  "text.autoconfig.shieldisruptor_general.option.hideInMainHand": "Auch in der Haupthand verstecken?",
+  "text.autoconfig.shieldisruptor_general.option.hiddenItems": "Zusätzliche versteckte Gegenstände",
+  "text.autoconfig.shieldisruptor_general.option.hiddenItems.@Tooltip": "Items hinzufügen, die versteckt werden sollen, e.g. ein Item wie \"minecraft:apple\" oder ein beliebiger Tag \"#c:shields\"",
+  "text.autoconfig.shieldisruptor_general.title": "Shield Disruptor",
+  "text.autoconfig.shieldisruptor_general.option.hideShields.@Tooltip": "Versteckt alle Schilde, einschließlich gemoddeter.\nFalls mal ein Schild nicht versteckt wird,\nkannst du es selbst zu der Liste an versteckten Gegenständen hinzufügen."
 }

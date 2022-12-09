@@ -9,11 +9,10 @@ import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tag.ItemTags;
-import net.minecraft.tag.TagBuilder;
-import net.minecraft.tag.TagEntry;
 import net.minecraft.tag.TagKey;
+import net.minecraft.item.ShieldItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,14 +33,24 @@ public class MixinHeldItemRenderer {
         if (!MinecraftClient.getInstance().options.getPerspective().isFirstPerson() || stack.isEmpty() || entity.isUsingItem()) return;
 
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        if (player != null && player.getOffHandStack() != stack) return;
+        if(player == null) return;
 
         GeneralConfig config = ModCore.getMain().getGeneralConfig();
         String id = Registry.ITEM.getId(stack.getItem()).toString();
 
+        if (!config.hideInMainHand && player.getOffHandStack() != stack) return;
+
+        // Hide all shields that are a "ShieldItem" or in the tag "c:shields" for maximum compatibility
+        if(config.hideShields && stack.getItem() instanceof ShieldItem
+                || stack.isIn(TagKey.of(Registry.ITEM_KEY, new Identifier("c:shields")))) {
+            callback.cancel();
+            return;
+        }
+
         // Check if the item is specified in config
         if(config.contains(id) || (id.startsWith("minecraft:") && config.contains(id.substring(10)))) {
             callback.cancel();
+            return;
         }
 
         // Check if the item has a tag that was specified in config
@@ -52,13 +61,14 @@ public class MixinHeldItemRenderer {
                 continue;
             }
 
-            TagKey t = TagKey.of(
+            TagKey<Item> t = TagKey.of(
                     Registry.ITEM_KEY,
                     new Identifier(
                             tagKey.split(":")[0].replaceFirst("#", ""),
                             tagKey.split(":")[1]));
             if(stack.isIn(t)) {
                 callback.cancel();
+                return;
             }
         }
     }
