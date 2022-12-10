@@ -11,6 +11,8 @@
 A simple fabric mod to hide shields while not defending or to hide other offhand items (specified in the settings).<br>
 By default it hides the shield when not blocking and the totem of undying.
 
+**Download it** from the [Modrinth](https://modrinth.com/mod/shielddisruptor) page: https://modrinth.com/mod/shielddisruptor
+
 This is a port of the original ShieldDisruptor by [HeyZeer0](https://github.com/HeyZeer0) to newer Minecraft versions, as the original is abandoned. I'll try to maintain this as best as possible.
 
 **Current Differences:**
@@ -24,7 +26,9 @@ This is a port of the original ShieldDisruptor by [HeyZeer0](https://github.com/
 
 ## :warning: Requirements
 This mod works both with the Fabric and the Quilt mod loader.  
-[Mod Menu](https://modrinth.com/mod/modmenu) is recommended to be able to change the settings.
+- You need [Fabric API](https://modrinth.com/mod/fabric-api) or for Quilt its equivalent [Quilted Fabric API](https://modrinth.com/mod/qsl).
+- [Mod Menu](https://modrinth.com/mod/modmenu) is recommended to be able to change the settings.  
+
 
 ## Adding hidden offhand items
 This requires Mod Menu to be installed.
