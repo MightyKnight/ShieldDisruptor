@@ -44,6 +44,16 @@ allprojects {
             url "https://maven.shedaniel.me/"
         }
 
+        maven {
+            name "Jitpack - For FabricShieldLib"
+            url = "https://jitpack.io"
+        }
+
+        maven {
+            name "Modrinth Maven for Midnightlib, required by FabricShieldLib"
+            url = "https://api.modrinth.com/maven"
+        }
+
     }
 
     // floader needs to be in every sub module
@@ -69,6 +79,8 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:${project.common_cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    modCompileOnly("com.github.CrimsonDawn45:Fabric-Shield-Lib:${project.fabric_shield_lib_version}")
 
     subprojects.forEach((project) -> {
         include(project) {

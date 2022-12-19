@@ -1,5 +1,6 @@
 package me.mightyknight.sd.common.mixin;
 
+import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
 import me.mightyknight.sd.common.SDConfig;
 import me.mightyknight.sd.common.ShieldDisruptor;
 import me.mightyknight.sd.versioned.Versioned;
@@ -45,6 +46,12 @@ public class MixinHeldItemRenderer {
 
             // Block the normal minecraft shield and all shields extending from it
             if(stack.getItem() instanceof ShieldItem) {
+                callback.cancel();
+                return;
+            }
+
+            // Block shields from FabricShieldLib if it is loaded
+            if(FabricLoader.getInstance().isModLoaded("fabricshieldlib") && stack.getItem() instanceof FabricShield) {
                 callback.cancel();
                 return;
             }
