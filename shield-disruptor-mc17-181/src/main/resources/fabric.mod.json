@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "shield-disruptor-mc17-181",
+  "version": "${version}",
+
+  "name": "Shield Disruptor for 1.17-1.18.1",
+  "description": "Version-specific code for Minecraft 1.17-1.18.1",
+  "icon": "assets/shield-disruptor/logo.png",
+  "authors": [
+    "MightyKnight"
+  ],
+  "contact": {
+    "homepage": "https://github.com/MightyKnight",
+    "issues": "https://github.com/MightyKnight/ShieldDisruptor/issues"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "shield-disruptor-versioned": [
+      "me.mightyknight.sd.mc17.SDEntryPoint"
+    ]
+  },
+  "depends": {
+    "minecraft": ["1.17.x", "1.18", "1.18.1"]
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "shield-disruptor",
+      "badges": ["library"]
+    }
+  }
+}

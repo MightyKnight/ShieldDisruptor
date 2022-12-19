@@ -1,13 +1,13 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "net.heyzeer0.sd.mixins",
+    "package": "me.mightyknight.sd.common.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [],
     "client": [
         "MixinHeldItemRenderer"
     ],
     "injectors": {
-    "defaultRequire": 1
-}
+        "defaultRequire": 1
+    }
 }

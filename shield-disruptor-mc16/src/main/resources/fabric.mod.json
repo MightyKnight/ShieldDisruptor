@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "shield-disruptor-mc16",
+  "version": "${version}",
+
+  "name": "Shield Disruptor for 1.16",
+  "description": "Version-specific code for Minecraft 1.16",
+  "icon": "assets/shield-disruptor/logo.png",
+  "authors": [
+    "MightyKnight"
+  ],
+  "contact": {
+    "homepage": "https://github.com/MightyKnight",
+    "issues": "https://github.com/MightyKnight/ShieldDisruptor/issues"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "shield-disruptor-versioned": [
+      "me.mightyknight.sd.mc16.SDEntryPoint"
+    ]
+  },
+  "depends": {
+    "minecraft": "1.16.x"
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "shield-disruptor",
+      "badges": ["library"]
+    }
+  }
+}

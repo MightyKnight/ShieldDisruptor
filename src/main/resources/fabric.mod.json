@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "id": "shieldisruptor",
+  "id": "shield-disruptor",
   "version": "${version}",
 
   "name": "Shield Disruptor",
   "description": "Hides your offhand shield, totem of undying or any other configurated item while not using it.",
-  "icon": "assets/shieldisruptor/logo.png",
+  "icon": "assets/shield-disruptor/logo.png",
   "authors": [
     "MightyKnight", "HeyZeer0"
   ],
@@ -14,26 +14,32 @@
     "sources": "https://github.com/MightyKnight/ShieldDisruptor",
     "issues": "https://github.com/MightyKnight/ShieldDisruptor/issues"
   },
-  "license": "AGPL-3.0",
+  "license": "LGPL-3.0",
   "environment": "client",
   "entrypoints": {
     "main": [
-      "net.heyzeer0.sd.ModCore"
+      "me.mightyknight.sd.common.ShieldDisruptor"
+    ],
+    "preLaunch": [
+      "me.mightyknight.sd.common.PreLaunch"
     ],
     "modmenu": [
-      "net.heyzeer0.sd.integrations.SDModMenuIntegration"
+      "me.mightyknight.sd.common.integrations.ModMenuIntegration"
     ]
   },
   "mixins": [
     "shieldisruptor.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.7.4",
-    "fabric-api": "*",
-    "minecraft": ">=1.19.3",
+    "minecraft": ["1.16.x", "1.17.x", "1.18.x", "1.19.x"],
     "cloth-config2": "*"
   },
   "recommends": {
     "modmenu": "*"
+  },
+  "custom": {
+    "projects": {
+      "modrinth": "ded5u7eL"
+    }
   }
 }

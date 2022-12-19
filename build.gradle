@@ -1,48 +1,90 @@
+/*
+Thanks to jacg311 and his project https://github.com/jacg311/shared-resources
+for serving as a reference to creating this multi-version Gradle project
+*/
+
+
 plugins {
-    id 'java'
     id 'fabric-loom' version '1.0-SNAPSHOT'
 }
 
-repositories {
-    maven { url "https://maven.shedaniel.me/" }
-    maven { url "https://maven.terraformersmc.com/releases/"}
+loom {
+    // im not sure what this does,
+    // but i think we might need it
+    runConfigs.configureEach {
+        ideConfigGenerated = true
+    }
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+// stuff that applies to all projects
+allprojects {
+    apply plugin: "fabric-loom"
 
-group = project.maven_group
-version = "${project.mod_version}+${project.minecraft_version}"
-archivesBaseName = project.archives_base_name
+    // Java version is 8 for most versions, needs changing in submodules build.gradle for newer versions
+    tasks.withType(JavaCompile).configureEach {
+        it.options.release = 8
+    }
+
+    java {
+        withSourcesJar()
+    }
+
+    version = project.mod_version
+    group = project.maven_group
+
+    // add repos for all projects
+    repositories {
+
+        maven {
+            name "Terraformers Maven"
+            url 'https://maven.terraformersmc.com'
+        }
+        maven {
+            name "Shedaniel Maven"
+            url "https://maven.shedaniel.me/"
+        }
+
+    }
+
+    // floader needs to be in every sub module
+    dependencies {
+        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    }
+
+    processResources {
+        inputs.property "version", version
+
+        filesMatching("fabric.mod.json") {
+            expand "version": version
+        }
+    }
+}
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
-    modApi "me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}", {
+    // dummy versions
+    minecraft "com.mojang:minecraft:${project.common_minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.common_yarn_mappings}:v2"
+
+    modImplementation "com.terraformersmc:modmenu:${project.common_modmenu_version}"
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.common_cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}", {
-        exclude group: "net.fabricmc.fabric-api"
+
+    subprojects.forEach((project) -> {
+        include(project) {
+            transitive = false
+        }
+    })
+}
+
+// stuff that applies to all sub projects
+subprojects {
+
+    dependencies {
+        // include the root project because that's where our common code is
+        implementation(project(path: ":", configuration: "namedElements")) {
+            // having 2 floaders from the sub project and root project causes issues so we get rid of one.
+            exclude group: "net.fabricmc", module: "fabric-loader"
+        }
     }
-
-}
-
-processResources {
-    inputs.property "version", project.version
-	
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
 }

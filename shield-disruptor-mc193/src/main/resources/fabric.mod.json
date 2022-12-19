@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "shield-disruptor-mc193",
+  "version": "${version}",
+
+  "name": "Shield Disruptor for 1.19.3+",
+  "description": "Version-specific code for Minecraft 1.19.3+",
+  "icon": "assets/shield-disruptor/logo.png",
+  "authors": [
+    "MightyKnight"
+  ],
+  "contact": {
+    "homepage": "https://github.com/MightyKnight",
+    "issues": "https://github.com/MightyKnight/ShieldDisruptor/issues"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "shield-disruptor-versioned": [
+      "me.mightyknight.sd.mc19.SDEntryPoint"
+    ]
+  },
+  "depends": {
+    "minecraft": ["1.19.3"]
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "shield-disruptor",
+      "badges": ["library"]
+    }
+  }
+}

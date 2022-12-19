@@ -1,0 +1,9 @@
+{
+  "text.autoconfig.shieldisruptor_general.option.isEnabled": "Enable mod",
+  "text.autoconfig.shieldisruptor_general.option.hideShields": "Hide ALL shields",
+  "text.autoconfig.shieldisruptor_general.option.hideShields.@Tooltip": "Hides all shields, including modded ones.\nIf a shield doesn't get hidden,\nyou can add it to the list of hidden items yourself.",
+  "text.autoconfig.shieldisruptor_general.option.hideInMainHand": "Also hide if in main hand?",
+  "text.autoconfig.shieldisruptor_general.option.hiddenItems": "Additional hidden items",
+  "text.autoconfig.shieldisruptor_general.option.hiddenItems.@Tooltip": "Add items you want to hide, e.g. an item like \"minecraft:apple\" or any item tag like \"#c:shields\"",
+  "text.autoconfig.shieldisruptor_general.title": "Shield Disruptor"
+}
