@@ -14,3 +14,14 @@ dependencies {
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 17
 }
+
+project.loom {
+    runs {
+        client {
+            client()
+            setConfigName("Fabric 1.19.3 Client")
+            ideConfigGenerated(true)
+            runDir("run/client-19")
+        }
+    }
+}

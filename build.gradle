@@ -75,8 +75,8 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.common_minecraft_version}"
     mappings "net.fabricmc:yarn:${project.common_yarn_mappings}:v2"
 
-    modImplementation "com.terraformersmc:modmenu:${project.common_modmenu_version}"
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.common_cloth_config_version}") {
+    modCompileOnly "com.terraformersmc:modmenu:${project.common_modmenu_version}"
+    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.common_cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 

@@ -9,3 +9,14 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 }
+
+project.loom {
+    runs {
+        client {
+            client()
+            setConfigName("Fabric 1.17 Client")
+            ideConfigGenerated(true)
+            runDir("run/client-17")
+        }
+    }
+}
