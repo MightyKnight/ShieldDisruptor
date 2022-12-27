@@ -1,4 +1,4 @@
-<img src="https://github.com/MightyKnight/ShieldDisruptor/blob/master/src/main/resources/assets/shieldisruptor/logo.png" width="128" height="128" />
+<img src="https://github.com/MightyKnight/ShieldDisruptor/raw/multi-version/src/main/resources/assets/shield-disruptor/logo.png" width="128" height="128" />
 
 # ShieldDisruptor
 [![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)](https://raw.githubusercontent.com/MightyKnight/ShieldDisruptor/multi-version/LICENSE)

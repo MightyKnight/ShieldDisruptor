@@ -8,14 +8,6 @@ plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
 }
 
-loom {
-    // im not sure what this does,
-    // but i think we might need it
-    runConfigs.configureEach {
-        ideConfigGenerated = true
-    }
-}
-
 // stuff that applies to all projects
 allprojects {
     apply plugin: "fabric-loom"
@@ -23,6 +15,14 @@ allprojects {
     // Java version is 8 for most versions, needs changing in submodules build.gradle for newer versions
     tasks.withType(JavaCompile).configureEach {
         it.options.release = 8
+    }
+
+    loom {
+        // im not sure what this does,
+        // but i think we might need it
+        runConfigs.configureEach {
+            ideConfigGenerated = true
+        }
     }
 
     java {
