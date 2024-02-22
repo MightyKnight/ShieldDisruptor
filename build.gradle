@@ -5,7 +5,13 @@ for serving as a reference to creating this multi-version Gradle project
 
 
 plugins {
-    id 'fabric-loom' version '1.0-SNAPSHOT'
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("net.fabricmc:fabric-loader:$loader_version")
+    }
 }
 
 // stuff that applies to all projects
@@ -66,6 +72,14 @@ allprojects {
 
         filesMatching("fabric.mod.json") {
             expand "version": version
+        }
+    }
+
+    // According to modmuss: "To force the loader version for all deps"
+    // https://discord.com/channels/507304429255393322/842691768175951942/1093276385742696488
+    configurations.all {
+        resolutionStrategy {
+            force("net.fabricmc:fabric-loader:$loader_version")
         }
     }
 }
