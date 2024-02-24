@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.mightyknight.sd.mcpre120.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": [
+    "MixinHeldItemRendererPre120"
+  ],
+  "plugin": "me.mightyknight.sd.multiversion_mixin.NeruinaMixinPluginImpl",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

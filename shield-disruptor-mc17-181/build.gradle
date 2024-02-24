@@ -8,6 +8,9 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:5.3.58") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    // https://fabricmc.net/wiki/documentation:fabric_loom#depending_on_sub_projects
+    implementation project(path: ":shield-disruptor-pre120mixins", configuration: "namedElements")// project(":shield-disruptor-pre120mixins")
 }
 
 project.loom {

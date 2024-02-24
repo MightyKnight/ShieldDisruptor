@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "shield-disruptor-mcpre120",
+  "version": "${version}",
+
+  "name": "Shield Disruptor Mixins <1.20",
+  "description": "Version-specific code for Minecraft before 1.20",
+  "icon": "assets/shield-disruptor/logo.png",
+  "authors": [
+    "MightyKnight"
+  ],
+  "contact": {
+    "homepage": "https://github.com/MightyKnight",
+    "issues": "https://github.com/MightyKnight/ShieldDisruptor/issues"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "me.mightyknight.sd.mcpre120.SDEntryPoint"
+    ]
+  },
+  "mixins": [
+    "shield-disruptor-mcpre120.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ["1.16.x", "1.17.x", "1.18.x", "1.19", "1.19.1", "1.19.2", "1.19.3"]
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "shield-disruptor",
+      "badges": ["library"]
+    }
+  }
+}

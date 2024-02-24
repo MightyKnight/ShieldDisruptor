@@ -11,7 +11,9 @@ pluginManagement {
 
 rootProject.name = "shield-disruptor"
 
+include("shield-disruptor-pre120mixins")
 include("shield-disruptor-mc16")
 include("shield-disruptor-mc17-181")
 include("shield-disruptor-mc182-192")
 include("shield-disruptor-mc193")
+include("shield-disruptor-mc120")
