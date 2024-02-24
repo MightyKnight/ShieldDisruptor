@@ -1,6 +1,6 @@
 package me.mightyknight.sd.common.mixin;
 
-//import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
+import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
 import me.mightyknight.sd.common.SDConfig;
 import me.mightyknight.sd.common.ShieldDisruptor;
 import me.mightyknight.sd.multiversion_mixin.VersionedMixin;
@@ -10,7 +10,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.HeldItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
@@ -58,7 +57,7 @@ public class MixinHeldItemRenderer {
             }
 
             // Block shields from FabricShieldLib if it is loaded
-            if(FabricLoader.getInstance().isModLoaded("fabricshieldlib")) { // && stack.getItem() instanceof FabricShield) {
+            if(FabricLoader.getInstance().isModLoaded("fabricshieldlib") && stack.getItem() instanceof FabricShield) {
                 callback.cancel();
                 return;
             }

@@ -1,6 +1,6 @@
 package me.mightyknight.sd.mcpre120.mixin;
 
-//import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
+import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
 import me.mightyknight.sd.common.SDConfig;
 import me.mightyknight.sd.common.ShieldDisruptor;
 import me.mightyknight.sd.multiversion_mixin.VersionedMixin;
@@ -57,7 +57,7 @@ public class MixinHeldItemRendererPre120 {
             }
 
             // Block shields from FabricShieldLib if it is loaded
-            if(FabricLoader.getInstance().isModLoaded("fabricshieldlib")) { // && stack.getItem() instanceof FabricShield) {
+            if(FabricLoader.getInstance().isModLoaded("fabricshieldlib") && stack.getItem() instanceof FabricShield) {
                 callback.cancel();
                 return;
             }
