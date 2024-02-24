@@ -4,10 +4,13 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ShieldDisruptor implements ModInitializer {
 
     private static ShieldDisruptor main;
+    public static final Logger LOGGER = LogManager.getLogger();
 
     ConfigHolder<SDConfig> config;
 

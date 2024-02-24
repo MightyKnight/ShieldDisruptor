@@ -20,7 +20,7 @@ allprojects {
 
     // Java version is 8 for most versions, needs changing in submodules build.gradle for newer versions
     tasks.withType(JavaCompile).configureEach {
-        it.options.release = 8
+        it.options.release = 14
     }
 
     loom {
@@ -95,6 +95,7 @@ dependencies {
     }
 
     modCompileOnly("com.github.CrimsonDawn45:Fabric-Shield-Lib:${project.fabric_shield_lib_version}")
+    include(implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixin_extras_version}")))
 
     subprojects.forEach((project) -> {
         include(project) {
