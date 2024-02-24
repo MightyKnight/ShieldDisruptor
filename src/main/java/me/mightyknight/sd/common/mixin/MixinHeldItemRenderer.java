@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HeldItemRenderer.class)
-@VersionedMixin(">=1.20")
+@VersionedMixin(">=1.19.4")
 public class MixinHeldItemRenderer {
 
     @Inject(at =

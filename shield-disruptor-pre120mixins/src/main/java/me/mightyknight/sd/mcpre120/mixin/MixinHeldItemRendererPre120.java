@@ -21,6 +21,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/*
+This class is named Pre120, however the mixin target already changed in version 1.19.4,
+so this actually applies only to all versions below 1.19.3.
+ */
 @Mixin(HeldItemRenderer.class)
 @VersionedMixin("<=1.19.3")
 public class MixinHeldItemRendererPre120 {
