@@ -17,7 +17,10 @@ public class RegistryHandlerImpl implements RegistryHandler {
     @Override
     public boolean stackHasTag(ItemStack stack, Identifier tagId) {
         Tag<Item> tag  = ItemTags.getTagGroup().getTag(tagId);
-        return stack.getItem().isIn(tag);
+        if(tag != null) {
+            return stack.getItem().isIn(tag);
+        }
+        return false;
     }
 
 }
