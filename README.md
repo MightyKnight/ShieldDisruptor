@@ -36,7 +36,13 @@ This requires Mod Menu to be installed.
 2. Add the _id_ of the item to the list
 <img src="https://user-images.githubusercontent.com/38622942/119516043-b11a1800-bd76-11eb-9bfb-419c6fd4b73e.png" height="128" />
 
+## Other options
+You can also add whole **item tags** like `#minecraft:music_discs`.
+This can be useful for example if another mod implements custom totems, if a tag is present just specify `#othermod:totems` instead of adding every instance individually.
 
+For shields specifically, the config option **"Hide all Shields"** will take care of trying to block all modded shields for you by using Fabrics built-in `#c:shields` tag and supporting modded shields from [FabricShieldLib](https://modrinth.com/mod/fabricshieldlib).
+
+If you want to hide items in your main hand too, you can enable the **"Hide in main hand"** config as well.
 
 ## Compilation
 Run `./gradlew build`.
