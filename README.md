@@ -16,9 +16,9 @@ By default it hides the shield when not blocking and the totem of undying.
 This is a port of the original ShieldDisruptor by [HeyZeer0](https://github.com/HeyZeer0) to newer Minecraft versions, as the original is abandoned. I'll try to maintain this as best as possible.
 
 **Current Differences:**
-- Updated to 1.16.5 - 1.20.4. All in a single jar file!
+- Updated to 1.16.5 - 1.20.5. All in a single jar file!
 - Superior support for **modded** shields, compatibility with FabricShieldLib shields
-- Ability to specify **item tags** to hide, for example "#minecraft:banners"
+- Ability to specify **item tags** to hide, for example `#minecraft:banners`
 - Option to also hide shields if held in the main hand
 - Added German translation
 - Added Config screen title and some tooltips
@@ -40,7 +40,7 @@ This requires Mod Menu to be installed.
 You can also add whole **item tags** like `#minecraft:music_discs`.
 This can be useful for example if another mod implements custom totems, if a tag is present just specify `#othermod:totems` instead of adding every instance individually.
 
-For shields specifically, the config option **"Hide all Shields"** will take care of trying to block all modded shields for you by using Fabrics built-in `#c:shields` tag and supporting modded shields from [FabricShieldLib](https://modrinth.com/mod/fabricshieldlib).
+For shields specifically, the config option **"Hide all Shields"** will take care of trying to block all modded shields for you by using Fabrics built-in `#c:tools/shields` tag (`c:shields` before 1.20.5) and supporting modded shields from [FabricShieldLib](https://modrinth.com/mod/fabricshieldlib).
 
 If you want to hide items in your main hand too, you can enable the **"Hide in main hand"** config as well.
 
