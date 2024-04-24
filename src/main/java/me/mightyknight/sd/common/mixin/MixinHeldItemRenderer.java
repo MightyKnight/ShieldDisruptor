@@ -62,7 +62,14 @@ public class MixinHeldItemRenderer {
                 return;
             }
 
+            // Block items in the tag "c:tools/shields" (>1.20.5)
+            if(Versioned.REGISTRY.stackHasTag(stack, new Identifier("c", "tools/shields"))) {
+                callback.cancel();
+                return;
+            }
+
             // Block items in the item tag "c:shields"
+            // [LEGACY] This tag was changed to "c:tools/shields" in 1.20.5
             if(Versioned.REGISTRY.stackHasTag(stack, new Identifier("c", "shields"))) {
                 callback.cancel();
                 return;
@@ -81,7 +88,7 @@ public class MixinHeldItemRenderer {
         for(String tagKey : ShieldDisruptor.getMain().getConfig().hiddenItems) {
 
             // Validate tag to prevent crashes
-            if (!tagKey.matches("#[a-z0-9_.-]+:[a-z0-9_.-]+")) {
+            if (!tagKey.matches("#[a-z0-9_.-]+:[a-z0-9_.-/]+")) {
                 continue;
             }
 
