@@ -3,6 +3,7 @@ package me.mightyknight.sd.common.mixin;
 import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
 import me.mightyknight.sd.common.SDConfig;
 import me.mightyknight.sd.common.ShieldDisruptor;
+import me.mightyknight.sd.multiversion_mixin.ReflectionUtils;
 import me.mightyknight.sd.multiversion_mixin.VersionedMixin;
 import me.mightyknight.sd.versioned.Versioned;
 import net.fabricmc.loader.api.FabricLoader;
@@ -63,14 +64,14 @@ public class MixinHeldItemRenderer {
             }
 
             // Block items in the tag "c:tools/shields" (>1.20.5)
-            if(Versioned.REGISTRY.stackHasTag(stack, Identifier.of("c", "tools/shields"))) {
+            if(Versioned.REGISTRY.stackHasTag(stack, ReflectionUtils.constructIdentifier("c", "tools/shields"))) {
                 callback.cancel();
                 return;
             }
 
             // Block items in the item tag "c:shields"
             // [LEGACY] This tag was changed to "c:tools/shields" in 1.20.5
-            if(Versioned.REGISTRY.stackHasTag(stack, Identifier.of("c", "shields"))) {
+            if(Versioned.REGISTRY.stackHasTag(stack, ReflectionUtils.constructIdentifier("c", "shields"))) {
                 callback.cancel();
                 return;
             }
@@ -93,7 +94,7 @@ public class MixinHeldItemRenderer {
             }
 
             // Check if item has the tag
-            Identifier tagId = Identifier.of(
+            Identifier tagId = ReflectionUtils.constructIdentifier(
                     tagKey.split(":")[0].replaceFirst("#", ""),
                     tagKey.split(":")[1]);
 
