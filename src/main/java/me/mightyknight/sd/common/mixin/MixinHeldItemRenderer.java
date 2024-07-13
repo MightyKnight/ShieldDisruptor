@@ -63,14 +63,14 @@ public class MixinHeldItemRenderer {
             }
 
             // Block items in the tag "c:tools/shields" (>1.20.5)
-            if(Versioned.REGISTRY.stackHasTag(stack, new Identifier("c", "tools/shields"))) {
+            if(Versioned.REGISTRY.stackHasTag(stack, Identifier.of("c", "tools/shields"))) {
                 callback.cancel();
                 return;
             }
 
             // Block items in the item tag "c:shields"
             // [LEGACY] This tag was changed to "c:tools/shields" in 1.20.5
-            if(Versioned.REGISTRY.stackHasTag(stack, new Identifier("c", "shields"))) {
+            if(Versioned.REGISTRY.stackHasTag(stack, Identifier.of("c", "shields"))) {
                 callback.cancel();
                 return;
             }
@@ -93,7 +93,7 @@ public class MixinHeldItemRenderer {
             }
 
             // Check if item has the tag
-            Identifier tagId = new Identifier(
+            Identifier tagId = Identifier.of(
                     tagKey.split(":")[0].replaceFirst("#", ""),
                     tagKey.split(":")[1]);
 
