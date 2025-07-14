@@ -16,7 +16,7 @@
   "license": "MIT",
   "environment": "client",
   "entrypoints": {
-    "main": [
+    "shield-disruptor-versioned": [
       "me.mightyknight.sd.mcpre120.SDEntryPoint"
     ]
   },
