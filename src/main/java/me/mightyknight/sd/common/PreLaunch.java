@@ -11,6 +11,7 @@ public class PreLaunch implements PreLaunchEntrypoint {
         if (FabricLoader.getInstance().getAllMods().stream().noneMatch(container -> container
                 .getMetadata()
                 .getId().startsWith("shield-disruptor-mc"))) {
+            ShieldDisruptor.LOGGER.debug("No versioning implementation found for this version");
             throw new RuntimeException("Shield Disruptor didn't load correctly! You're probably using an unsupported version of Minecraft.");
         }
 

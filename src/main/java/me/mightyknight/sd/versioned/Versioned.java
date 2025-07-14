@@ -1,5 +1,6 @@
 package me.mightyknight.sd.versioned;
 
+import me.mightyknight.sd.common.ShieldDisruptor;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.List;
@@ -14,7 +15,8 @@ public class Versioned {
         if(entryPoints.size() != 1) {
             // Either none or too many version specific entry points were loaded
             // Crash controlled and send feedback
-            throw new RuntimeException("Shield Disruptor didn't load correctly! You are propably using an unsupported version of Minecraft");
+            ShieldDisruptor.LOGGER.debug("Found {} entrypoints", entryPoints.size());
+            throw new RuntimeException("Shield Disruptor didn't load correctly! You are probably using an unsupported version of Minecraft");
         }
         VersionedEntryPoint entryPoint = FabricLoader.getInstance()
                 .getEntrypoints("shield-disruptor-versioned", VersionedEntryPoint.class).get(0);
