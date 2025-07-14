@@ -24,7 +24,7 @@ package me.mightyknight.sd.multiversion_mixin;
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap;
 import me.mightyknight.sd.common.ShieldDisruptor;
-import me.mightyknight.sd.multiversion_mixin.version.VersionString;
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
@@ -55,25 +55,39 @@ public class NeruinaMixinPlugin implements IMixinConfigPlugin {
                         ShieldDisruptor.LOGGER.debug("NeruinaMixinPlugin: " + className + " is" + (!applyIfPresent ? " " : " not ") + "being applied because " + modids + " are not loaded");
                         shouldApply = !applyIfPresent;
                     }
+                } else if (node.desc.equals(Type.getDescriptor(VersionedMixin.class))) {
+                    String min = Annotations.getValue(node, "min", "");
+                    String max = Annotations.getValue(node, "max", "");
+                    String currentVersion = Platform.getMinecraftVersion();
+                    ComparableVersion comparableVersion = new ComparableVersion(currentVersion);
+                    shouldApply = evaluateVersion(className, min, max, currentVersion, comparableVersion);
                 }
-                if (!shouldApply) return false;
-
-                if (node.desc.equals(Type.getDescriptor(VersionedMixin.class))) {
-                    String versionString = Annotations.getValue(node, "value");
-                    VersionString version = new VersionString(versionString);
-                    String mcVersion = Platform.getMinecraftVersion();
-                    if (version.isVersionValid(mcVersion)) {
-                        ShieldDisruptor.LOGGER.debug("NeruinaMixinPlugin: " + className + " is being applied because " + mcVersion + " is " + versionString);
-                    } else {
-                        ShieldDisruptor.LOGGER.debug("NeruinaMixinPlugin: " + className + " is not being applied because " + mcVersion + " is not " + versionString);
-                        shouldApply = false;
-                    }
-                }
+                if (!shouldApply) break;
             }
             return shouldApply;
         } catch (ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static boolean evaluateVersion(String className, String min, String max, String currentVersion, ComparableVersion comparableVersion) {
+        boolean shouldApply = true;
+        if (!min.isBlank()) {
+            shouldApply &= comparableVersion.compareTo(new ComparableVersion(min)) >= 0;
+        }
+        if (!max.isBlank()) {
+            shouldApply &= comparableVersion.compareTo(new ComparableVersion(max)) <= 0;
+        }
+        ShieldDisruptor.LOGGER.debug(String.format(
+                "NeruinaMixinPlugin: %s is %sbeing applied because we are using %s is in range (%s, %s)",
+                className,
+                shouldApply ? "" : "not ",
+                currentVersion,
+                min,
+                max
+        ));
+
+        return shouldApply;
     }
 
     private static boolean anyModsLoaded(List<String> modids) {

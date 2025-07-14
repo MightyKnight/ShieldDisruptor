@@ -26,7 +26,7 @@ This class is named Pre120, however the mixin target already changed in version 
 so this actually applies only to all versions below 1.19.3.
  */
 @Mixin(HeldItemRenderer.class)
-@VersionedMixin("<=1.19.3")
+@VersionedMixin(max="1.19.3")
 public class MixinHeldItemRendererPre120 {
 
     @Inject(at =
