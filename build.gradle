@@ -5,7 +5,7 @@ for serving as a reference to creating this multi-version Gradle project
 
 
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.10-SNAPSHOT'
 }
 
 configurations.all {
@@ -42,21 +42,21 @@ allprojects {
     repositories {
 
         maven {
-            name "Terraformers Maven"
-            url 'https://maven.terraformersmc.com'
+            name = "Terraformers Maven"
+            url = "https://maven.terraformersmc.com"
         }
         maven {
-            name "Shedaniel Maven"
-            url "https://maven.shedaniel.me/"
+            name = "Shedaniel Maven"
+            url = "https://maven.shedaniel.me/"
         }
 
         maven {
-            name "Jitpack - For FabricShieldLib"
+            name = "Jitpack - For FabricShieldLib"
             url = "https://jitpack.io"
         }
 
         maven {
-            name "Modrinth Maven for Midnightlib, required by FabricShieldLib"
+            name = "Modrinth Maven for Midnightlib, required by FabricShieldLib"
             url = "https://api.modrinth.com/maven"
         }
 
