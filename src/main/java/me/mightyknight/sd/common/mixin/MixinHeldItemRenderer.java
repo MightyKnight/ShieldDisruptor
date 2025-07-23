@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HeldItemRenderer.class)
-@VersionedMixin(min="1.20.5")
+@VersionedMixin(min="1.21.5")
 public class MixinHeldItemRenderer {
 
     @Inject(at =
@@ -31,7 +31,6 @@ public class MixinHeldItemRenderer {
             method = "renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemDisplayContext;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             cancellable = true
     )
-    @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference"})
     private void hideShield(LivingEntity entity, ItemStack stack, ItemDisplayContext renderMode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo callback) {
 
         if (!ShieldDisruptor.getMain().getConfig().isEnabled || entity != MinecraftClient.getInstance().player) return;
