@@ -21,7 +21,7 @@
     ]
   },
   "depends": {
-    "minecraft": ["1.17.x", "1.18", "1.18.1"]
+    "minecraft": [">=1.17 <=1.18.1"]
   },
   "custom": {
     "modmenu": {
