@@ -11,6 +11,7 @@ dependencies {
 
     // https://fabricmc.net/wiki/documentation:fabric_loom#depending_on_sub_projects
     implementation project(path: ":shield-disruptor-pre120mixins", configuration: "namedElements")// project(":shield-disruptor-pre120mixins")
+    runtimeOnly("org.apache.maven:maven-artifact:${property("maven_artifact")}")
 }
 
 // Minecraft 1.18 upwards uses Java 17
