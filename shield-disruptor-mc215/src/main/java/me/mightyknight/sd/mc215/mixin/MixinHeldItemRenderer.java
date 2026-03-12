@@ -1,4 +1,4 @@
-package me.mightyknight.sd.common.mixin;
+package me.mightyknight.sd.mc215.mixin;
 
 import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
 import me.mightyknight.sd.common.SDConfig;
@@ -10,7 +10,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.client.util.math.MatrixStack;
@@ -24,15 +23,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HeldItemRenderer.class)
-@VersionedMixin(min="1.21.9")
+@VersionedMixin(min="1.21.5", max="1.21.8")
 public class MixinHeldItemRenderer {
 
     @Inject(at =
     @At(value = "HEAD"),
-            method = "renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemDisplayContext;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;I)V",
+            method = "renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemDisplayContext;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             cancellable = true
     )
-    private void hideShield(LivingEntity entity, ItemStack stack, ItemDisplayContext renderMode, MatrixStack matrices, OrderedRenderCommandQueue queue, int light, CallbackInfo callback) {
+    private void hideShield(LivingEntity entity, ItemStack stack, ItemDisplayContext renderMode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo callback) {
 
         if (!ShieldDisruptor.getMain().getConfig().isEnabled || entity != MinecraftClient.getInstance().player) return;
         if (!MinecraftClient.getInstance().options.getPerspective().isFirstPerson() || stack.isEmpty() || entity.isUsingItem()) return;

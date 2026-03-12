@@ -3,8 +3,8 @@
   "id": "shield-disruptor-mc215",
   "version": "${version}",
 
-  "name": "Shield Disruptor for 1.21.5+",
-  "description": "Version-specific code for Minecraft 1.21.5+",
+  "name": "Shield Disruptor for 1.21.5-1.21.8",
+  "description": "Version-specific code for Minecraft 1.21.5-1.21.8",
   "icon": "assets/shield-disruptor/logo.png",
   "authors": [
     "MightyKnight"
@@ -20,9 +20,11 @@
       "me.mightyknight.sd.mc215.SDEntryPoint"
     ]
   },
-  "mixins": [],
+  "mixins": [
+    "shield-disruptor-mc215.mixins.json"
+  ],
   "depends": {
-    "minecraft": [">=1.21.5 <1.22"]
+    "minecraft": [">=1.21.5 <=1.21.10"]
   },
   "custom": {
     "modmenu": {

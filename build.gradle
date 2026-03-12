@@ -5,7 +5,7 @@ for serving as a reference to creating this multi-version Gradle project
 
 
 plugins {
-    id 'fabric-loom' version '1.11-SNAPSHOT'
+    id 'fabric-loom' version "${loom_version}"
 }
 
 configurations.configureEach {

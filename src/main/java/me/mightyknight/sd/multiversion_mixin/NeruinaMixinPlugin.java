@@ -41,18 +41,22 @@ public class NeruinaMixinPlugin implements IMixinConfigPlugin {
     public static boolean testClass(String className) {
         try {
             List<AnnotationNode> annotationNodes = MixinService.getService().getBytecodeProvider().getClassNode(className).visibleAnnotations;
-            if (annotationNodes == null) return true;
+            if (annotationNodes == null) {
+                ShieldDisruptor.LOGGER.error("No annotated nodes found, check versioning");
+                return true;
+            }
 
             boolean shouldApply = true;
             for (AnnotationNode node : annotationNodes) {
+                ShieldDisruptor.LOGGER.debug("Deciding application of annotated mixin: {}", node.toString());
                 if (node.desc.equals(Type.getDescriptor(ConditionalMixin.class))) {
                     List<String> modids = Annotations.getValue(node, "modids");
                     boolean applyIfPresent = Annotations.getValue(node, "applyIfPresent", Boolean.TRUE);
                     if (anyModsLoaded(modids)) {
-                        ShieldDisruptor.LOGGER.debug("NeruinaMixinPlugin: " + className + " is" + (applyIfPresent ? " " : " not ") + "being applied because " + modids + " are loaded");
+                        ShieldDisruptor.LOGGER.debug("NeruinaMixinPlugin: {} is{}being applied because {} are loaded", className, applyIfPresent ? " " : " not ", modids);
                         shouldApply = applyIfPresent;
                     } else {
-                        ShieldDisruptor.LOGGER.debug("NeruinaMixinPlugin: " + className + " is" + (!applyIfPresent ? " " : " not ") + "being applied because " + modids + " are not loaded");
+                        ShieldDisruptor.LOGGER.debug("NeruinaMixinPlugin: {} is{}being applied because {} are not loaded", className, !applyIfPresent ? " " : " not ", modids);
                         shouldApply = !applyIfPresent;
                     }
                 } else if (node.desc.equals(Type.getDescriptor(VersionedMixin.class))) {
@@ -78,14 +82,9 @@ public class NeruinaMixinPlugin implements IMixinConfigPlugin {
         if (!max.isBlank()) {
             shouldApply &= comparableVersion.compareTo(new ComparableVersion(max)) <= 0;
         }
-        ShieldDisruptor.LOGGER.debug(String.format(
-                "NeruinaMixinPlugin: %s is %sbeing applied because we are using %s is in range (%s, %s)",
-                className,
-                shouldApply ? "" : "not ",
-                currentVersion,
-                min,
-                max
-        ));
+        String applicationYesNoString = shouldApply ? "" : "not ";
+        ShieldDisruptor.LOGGER.info("NeruinaMixinPlugin: {} is {}being applied because version {} is {} in range ({}, {})",
+                className, applicationYesNoString, currentVersion, applicationYesNoString, min, max);
 
         return shouldApply;
     }
