@@ -7,22 +7,22 @@ import me.mightyknight.sd.multiversion_mixin.ReflectionUtils;
 import me.mightyknight.sd.multiversion_mixin.VersionedMixin;
 import me.mightyknight.sd.versioned.Versioned;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.item.HeldItemRenderer;
-import net.minecraft.item.ItemDisplayContext;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShieldItem;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.ItemInHandRenderer;
+import net.minecraft.world.item.ItemDisplayContext;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(HeldItemRenderer.class)
+@Mixin(ItemInHandRenderer.class)
 @VersionedMixin(min="1.21.5", max="1.21.8")
 public class MixinHeldItemRenderer {
 
@@ -31,12 +31,12 @@ public class MixinHeldItemRenderer {
             method = "renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemDisplayContext;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             cancellable = true
     )
-    private void hideShield(LivingEntity entity, ItemStack stack, ItemDisplayContext renderMode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo callback) {
+    private void hideShield(LivingEntity entity, ItemStack stack, ItemDisplayContext renderMode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, CallbackInfo callback) {
 
-        if (!ShieldDisruptor.getMain().getConfig().isEnabled || entity != MinecraftClient.getInstance().player) return;
-        if (!MinecraftClient.getInstance().options.getPerspective().isFirstPerson() || stack.isEmpty() || entity.isUsingItem()) return;
+        if (!ShieldDisruptor.getMain().getConfig().isEnabled || entity != Minecraft.getInstance().player) return;
+        if (!Minecraft.getInstance().options.getCameraType().isFirstPerson() || stack.isEmpty() || entity.isUsingItem()) return;
 
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        LocalPlayer player = Minecraft.getInstance().player;
         if(player == null) return;
 
         SDConfig config = ShieldDisruptor.getMain().getConfig();
@@ -44,7 +44,7 @@ public class MixinHeldItemRenderer {
         // Hide offhand only or both based on config option
         // E.g. if main hand is disabled, check if the item is the same as in offhand and otherwise quit
         if(!config.hideInMainHand) {
-            if(player.getOffHandStack() != stack) return;
+            if(player.getOffhandItem() != stack) return;
         }
 
         // Hide all shields that are a "ShieldItem" or in the tag "c:shields" for maximum compatibility

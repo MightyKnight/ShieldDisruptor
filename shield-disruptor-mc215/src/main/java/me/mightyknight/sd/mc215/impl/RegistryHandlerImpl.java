@@ -1,25 +1,25 @@
 package me.mightyknight.sd.mc215.impl;
 
 import me.mightyknight.sd.versioned.RegistryHandler;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.resources.Identifier;
 
 public class RegistryHandlerImpl implements RegistryHandler {
 
     @Override
     public String getItemId(Item item) {
-        return Registries.ITEM.getId(item).toString();
+        return BuiltInRegistries.ITEM.getKey(item).toString();
     }
 
     @Override
     public boolean stackHasTag(ItemStack stack, Identifier tagId) {
-        TagKey<Item> tag = TagKey.of(RegistryKeys.ITEM, tagId);
+        TagKey<Item> tag = TagKey.create(Registries.ITEM, tagId);
         if(tag != null) {
-            return stack.isIn(tag);
+            return stack.is(tag);
         }
         return false;
     }

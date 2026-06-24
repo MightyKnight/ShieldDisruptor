@@ -5,7 +5,7 @@ for serving as a reference to creating this multi-version Gradle project
 
 
 plugins {
-    id "net.fabricmc.fabric-loom" version "${loom_version}"
+    id 'fabric-loom' version "${loom_version}"
 }
 
 configurations.configureEach {
@@ -14,14 +14,13 @@ configurations.configureEach {
     }
 }
 
-
 // stuff that applies to all projects
 allprojects {
     apply plugin: "fabric-loom"
 
     // Java version is 8 for most versions, needs changing in submodules build.gradle for newer versions
     tasks.withType(JavaCompile).configureEach {
-        it.options.release = 25
+        it.options.release = 14
     }
 
     loom {
@@ -34,8 +33,6 @@ allprojects {
 
     java {
         withSourcesJar()
-        sourceCompatibility = JavaVersion.VERSION_25
-        targetCompatibility = JavaVersion.VERSION_25
     }
 
     version = project.mod_version
@@ -67,7 +64,7 @@ allprojects {
 
     // floader needs to be in every sub module
     dependencies {
-        implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     }
 
     processResources {
@@ -90,14 +87,15 @@ allprojects {
 dependencies {
     // dummy versions
     minecraft "com.mojang:minecraft:${project.common_minecraft_version}"
+    mappings loom.officialMojangMappings()
 
-    compileOnly "com.terraformersmc:modmenu:${project.common_modmenu_version}"
-    compileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.common_cloth_config_version}") {
+    modCompileOnly "com.terraformersmc:modmenu:${project.common_modmenu_version}"
+    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.common_cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    //compileOnly("com.github.StellarWind22:Fabric-Shield-Lib:${project.fabric_shield_lib_version}")
-    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixin_extras_version}")))
+    modCompileOnly("com.github.StellarWind22:Fabric-Shield-Lib:${project.fabric_shield_lib_version}")
+    include(implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixin_extras_version}")))
 
     // For Neruina Multiversion Mixin Version Comparison
     include(implementation("org.apache.maven:maven-artifact:${property("maven_artifact")}"))
@@ -114,9 +112,9 @@ subprojects {
 
     dependencies {
         // include the root project because that's where our common code is
-        implementation(project(":")) {
+        implementation(project(path: ":", configuration: "namedElements")) {
             // having 2 floaders from the sub project and root project causes issues so we get rid of one.
-            //exclude group: "net.fabricmc", module: "fabric-loader"
+            exclude group: "net.fabricmc", module: "fabric-loader"
         }
     }
 }

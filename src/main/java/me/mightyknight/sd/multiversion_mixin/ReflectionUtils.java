@@ -27,8 +27,8 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import me.mightyknight.sd.common.ShieldDisruptor;
 import me.mightyknight.sd.multiversion_mixin.version.PehkuiVersionUtils;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.InvalidIdentifierException;
+import net.minecraft.resources.Identifier;
+import net.minecraft.IdentifierException;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -74,7 +74,7 @@ public class ReflectionUtils {
         if (CONSTRUCT_ID_FROM_STRING != null) {
             try {
                 return (Identifier) CONSTRUCT_ID_FROM_STRING.invoke(id);
-            } catch (final InvalidIdentifierException e) {
+            } catch (final IdentifierException e) {
                 throw e;
             } catch (final Throwable e) {
                 throw new RuntimeException(e);
@@ -88,7 +88,7 @@ public class ReflectionUtils {
         if (CONSTRUCT_ID_FROM_STRINGS != null) {
             try {
                 return (Identifier) CONSTRUCT_ID_FROM_STRINGS.invoke(namespace, path);
-            } catch (final InvalidIdentifierException e) {
+            } catch (final IdentifierException e) {
                 throw e;
             } catch (final Throwable e) {
                 throw new RuntimeException(e);

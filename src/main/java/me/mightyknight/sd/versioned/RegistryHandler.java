@@ -1,8 +1,8 @@
 package me.mightyknight.sd.versioned;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.Identifier;
 
 public interface RegistryHandler {
 
