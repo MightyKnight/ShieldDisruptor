@@ -103,7 +103,7 @@ dependencies {
     include(implementation("org.apache.maven:maven-artifact:${property("maven_artifact")}"))
 
     subprojects.forEach((project) -> {
-        include(project) {
+        include(project.dependencies.project(project.path)) {
             transitive = false
         }
     })
