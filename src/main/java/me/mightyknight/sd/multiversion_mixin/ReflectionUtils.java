@@ -81,7 +81,7 @@ public class ReflectionUtils {
             }
         }
 
-        return Identifier.of(id);
+        return Identifier.parse(id);
     }
 
     public static Identifier constructIdentifier(final String namespace, final String path) {
@@ -95,7 +95,7 @@ public class ReflectionUtils {
             }
         }
 
-        return Identifier.of(namespace, path);
+        return Identifier.fromNamespaceAndPath(namespace, path);
     }
 
 

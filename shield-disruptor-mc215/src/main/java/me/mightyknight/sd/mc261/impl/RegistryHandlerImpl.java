@@ -1,4 +1,4 @@
-package me.mightyknight.sd.mc215.impl;
+package me.mightyknight.sd.mc261.impl;
 
 import me.mightyknight.sd.versioned.RegistryHandler;
 import net.minecraft.world.item.Item;

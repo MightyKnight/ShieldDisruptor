@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "shield-disruptor-mc215",
+  "id": "shield-disruptor-mc261",
   "version": "${version}",
 
-  "name": "Shield Disruptor for 1.21.5-1.21.8",
-  "description": "Version-specific code for Minecraft 1.21.5-1.21.8",
+  "name": "Shield Disruptor for 26.1+",
+  "description": "Version-specific code for Minecraft 26.1+",
   "icon": "assets/shield-disruptor/logo.png",
   "authors": [
     "MightyKnight"
@@ -17,14 +17,11 @@
   "environment": "client",
   "entrypoints": {
     "shield-disruptor-versioned": [
-      "me.mightyknight.sd.mc215.SDEntryPoint"
+      "me.mightyknight.sd.mc261.SDEntryPoint"
     ]
   },
-  "mixins": [
-    "shield-disruptor-mc215.mixins.json"
-  ],
   "depends": {
-    "minecraft": [">=1.21.5 <=1.21.11"]
+    "minecraft": [">=26.1"]
   },
   "custom": {
     "modmenu": {

@@ -1,16 +1,15 @@
-archives_base_name = "shield-disruptor-1.21.5"
+archives_base_name = "shield-disruptor-26.1"
 
 dependencies {
-    minecraft "com.mojang:minecraft:1.21.8"
-    mappings "net.fabricmc:yarn:1.21.8+build.1:v2"
+    minecraft "com.mojang:minecraft:26.1"
 
-    implementation "com.terraformersmc:modmenu:15.0.0-beta.3"
-    api("me.shedaniel.cloth:cloth-config-fabric:19.0.147") {
+    implementation "com.terraformersmc:modmenu:18.0.0-beta.1"
+    api("me.shedaniel.cloth:cloth-config-fabric:26.1.154") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
     // ModMenu seems to need it
-    implementation "net.fabricmc.fabric-api:fabric-api:0.129.0+1.21.8"
+    implementation "net.fabricmc.fabric-api:fabric-api:0.145.1+26.1"
 
     //modCompileOnly("com.github.StellarWind22:Fabric-Shield-Lib:${project.fabric_shield_lib_version}")
     runtimeOnly("org.apache.maven:maven-artifact:${property("maven_artifact")}")
@@ -25,9 +24,9 @@ project.loom {
     runs {
         client {
             client()
-            setConfigName("Fabric 1.21.5+ Client")
+            setConfigName("Fabric 26.1+ Client")
             ideConfigGenerated(true)
-            runDir("run/client-215")
+            runDir("run/client-261")
         }
     }
 }

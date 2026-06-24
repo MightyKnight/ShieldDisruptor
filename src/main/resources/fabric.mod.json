@@ -31,7 +31,7 @@
     "shieldisruptor.mixins.json"
   ],
   "depends": {
-    "minecraft": ["1.16.x", "1.17.x", "1.18.x", "1.19.x", "1.20.x", "1.21.x"],
+    "minecraft": ">=26.1",
     "cloth-config2": "*"
   },
   "recommends": {

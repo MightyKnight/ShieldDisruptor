@@ -1,6 +1,6 @@
 package me.mightyknight.sd.common.mixin;
 
-import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
+//import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShield;
 import me.mightyknight.sd.common.SDConfig;
 import me.mightyknight.sd.common.ShieldDisruptor;
 import me.mightyknight.sd.multiversion_mixin.ReflectionUtils;
@@ -35,7 +35,7 @@ public class MixinItemInHandRenderer {
     private void hideShield(LivingEntity entity, ItemStack stack, ItemDisplayContext renderMode, PoseStack matrices, SubmitNodeCollector queue, int light, CallbackInfo callback) {
 
         if (!ShieldDisruptor.getMain().getConfig().isEnabled || entity != Minecraft.getInstance().player) return;
-        if (!Minecraft.getInstance().options.getPerspective().isFirstPerson() || stack.isEmpty() || entity.isUsingItem()) return;
+        if (!Minecraft.getInstance().options.getCameraType().isFirstPerson() || stack.isEmpty() || entity.isUsingItem()) return;
 
         LocalPlayer player = Minecraft.getInstance().player;
         if(player == null) return;
@@ -45,7 +45,7 @@ public class MixinItemInHandRenderer {
         // Hide offhand only or both based on config option
         // E.g. if main hand is disabled, check if the item is the same as in offhand and otherwise quit
         if(!config.hideInMainHand) {
-            if(player.getOffHandStack() != stack) return;
+            if(player.getOffhandItem() != stack) return;
         }
 
         // Hide all shields that are a "ShieldItem" or in the tag "c:shields" for maximum compatibility
@@ -58,10 +58,10 @@ public class MixinItemInHandRenderer {
             }
 
             // Block shields from FabricShieldLib if it is loaded
-            if(FabricLoader.getInstance().isModLoaded("fabricshieldlib") && stack.getItem() instanceof FabricShield) {
+            /*if(FabricLoader.getInstance().isModLoaded("fabricshieldlib") && stack.getItem() instanceof FabricShield) {
                 callback.cancel();
                 return;
-            }
+            }*/
 
             // Block items in the tag "c:tools/shields" (>1.20.5)
             if(Versioned.REGISTRY.stackHasTag(stack, ReflectionUtils.constructIdentifier("c", "tools/shields"))) {
